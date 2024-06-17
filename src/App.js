@@ -2,12 +2,12 @@ import './App.css';
 import { useState } from 'react';
 
 function App() {
-  const [status, setStatus] = useState("Not delivered");
+  const [status, setStatus] = useState(false);
   return (
     <div>
-      <h1>The status is: {status}</h1>
-
-      <button onClick={() => setStatus("Delivered")}>Deliver</button>
+      <label>Click here to update status</label>
+      <input type="checkbox" value={status} onChange={() => setStatus(!status)} />
+      <p>{status ? "Ok" : "Not implemented"}</p>
     </div>
   )
 }
