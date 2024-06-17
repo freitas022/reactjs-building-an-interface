@@ -1,20 +1,15 @@
 import './App.css';
+import { useState } from 'react';
 
-function App({name}) {
-
-  const people = ["Math", "Alex", "Maria"];
-  console.log(people[1]);
-  const [, , third] = ["Math", "Alex", "Maria"];
-  // console.log(first);
-  console.log(third);
-
+function App() {
+  const [status, setStatus] = useState("Not delivered");
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Hello {third}</h1>
-      </header>
+    <div>
+      <h1>The status is: {status}</h1>
+
+      <button onClick={() => setStatus("Delivered")}>Deliver</button>
     </div>
-  );
+  )
 }
 
 export default App;
