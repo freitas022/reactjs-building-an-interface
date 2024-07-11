@@ -1,15 +1,17 @@
-import { useReducer } from "react";
-import "./App.css";
+import React, { useState } from "react";
 
-function App() {
+function Checkbox() {
 
-  const [number, setNumber] = useReducer((number, newNumber) => number + newNumber, 0);
+  const [checked, toggle] = useState((checked => !checked), false);
 
   return (
     <>
-    <button on onClick={() => setNumber(1)}>{number}</button>
+      <input type="checkbox" value={checked} onChange={toggle} />
+      {checked ? "checked" : "not checked"}
     </>
   );
 }
 
-export default App;
+export default function App() {
+  return <Checkbox />;
+}
