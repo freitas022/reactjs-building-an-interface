@@ -1,17 +1,33 @@
-import React, { useState } from "react";
+import { useReducer } from "react";
+import "./App.css";
 
-function Checkbox() {
+const initalState = {
+  message: "Olá!",
+};
 
-  const [checked, toggle] = useState((checked => !checked), false);
+function reducer(state, action) {
+  switch (action.type) {
+    case "patrao":
+      return {
+        message: "Fala meu patrão!",
+      };
+    case "diretor":
+      return {
+        message: "Fala meu diretor!",
+      };
+  }
+}
+
+function App() {
+  const [state, dispatch] = useReducer(reducer, initalState);
 
   return (
     <>
-      <input type="checkbox" value={checked} onChange={toggle} />
-      {checked ? "checked" : "not checked"}
+      <p>Mensagem: {state.message}</p>
+      <button onClick={() => dispatch({type: "diretor"})}>diretor</button>
+      <button onClick={() => dispatch({type: "patrao"})}>patrao</button>
     </>
   );
 }
 
-export default function App() {
-  return <Checkbox />;
-}
+export default App;
