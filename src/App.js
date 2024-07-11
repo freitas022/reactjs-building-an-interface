@@ -1,37 +1,27 @@
-import { useState } from 'react';
-import './App.css';
-import { useEffect } from 'react';
+import { useState } from "react";
+import "./App.css";
+import { useEffect } from "react";
 
 function App() {
-
-  const [name, setName] = useState("Matheus");
-  const [admin, setAdmin] = useState(false);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    console.log(`Parabéns, ${name}`)
-  }, [name])
-
-  useEffect(() => {
-    console.log(
-      `O usuário: ${
-        admin ? "é admin" : "não é admin"
-      }`
-    )
-  }, [admin])
+    fetch(`https://api.github.com/users`)
+      .then((response) => response.json())
+      .then(setData);
+  }, []);
 
   return (
-    <section>
-      <p>Parabéns, {name} !</p>
-      <button onClick={() => setName("João")}>
-          Veja o ganhador
-      </button>
-      <p>
-        {admin ? "usuário logado" : "não logado"}
-      </p>
-      <button onClick={() => setAdmin(true)}>
-          Entrar
-      </button>
-    </section>
+    <>
+    <ul>
+      {data.map((user) => (
+        <div key={user.id}>
+          <li>Login: {user.login} <br /> Url: {user.url}</li>
+        </div>
+      ))}
+    </ul>
+    <button onClick={() => setData([])}>Remover dados</button>
+    </>
   );
 }
 
