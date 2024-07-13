@@ -1,48 +1,27 @@
-import { useState } from "react";
 import "./App.css";
+import { useInput } from "./components/UseInput";
 
 function App() {
-  {/*
-    before
-
-  const sound = useRef();
-  const color = useRef();
+  
+  const [soundProps, resetSound] = useInput("");
+  const [colorProps, resetColor] = useInput("#000000");
 
   const submit = (e) => {
     e.preventDefault();
-    const soundVal = sound.current.value;
-    const colorVal = color.current.value;
-
-    alert(`${soundVal} sounds like ${colorVal}`);
-    sound.current.value = "";
-    color.current.value = "";
-    
-  }*/}
-
-  {/**
-    after
-
-    */}
-
-  const [sound, setSound] = useState("");
-  const [color, setColor] = useState("#000000");
-
-  const submit = (e) => {
-    e.preventDefault();
-    alert(`${sound} sounds like ${color}`);    
-    setColor("#000000");
-    setSound("");
+    alert(`${soundProps.value} sounds like ${colorProps.value}`);    
+    resetColor("#000000");
+    resetSound("");
   }
 
   return (
     <>
       <form onSubmit={submit}>
         <input type="text" placeholder="Sound..."
-          value={sound}
-          onChange={(e) => setSound(e.target.value)} />
+          {... soundProps}
+          />
         <input type="color"
-          value={color}
-          onChange={(e) => setColor(e.target.value)} />
+          {... colorProps}
+          />
         <button>add</button>
       </form>
     </>
