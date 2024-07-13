@@ -1,29 +1,25 @@
+import { createContext } from "react";
 import "./App.css";
-import { useInput } from "./components/UseInput";
+
+export const TreeContext = createContext();
+
+const trees = [
+  { id: 1, type: "Maple" },
+  { id: 2, type: "Oak" },
+  { id: 3, type: "Family" },
+  { id: 4, type: "Component" },
+];
 
 function App() {
-  
-  const [soundProps, resetSound] = useInput("");
-  const [colorProps, resetColor] = useInput("#000000");
-
-  const submit = (e) => {
-    e.preventDefault();
-    alert(`${soundProps.value} sounds like ${colorProps.value}`);    
-    resetColor("#000000");
-    resetSound("");
-  }
 
   return (
     <>
-      <form onSubmit={submit}>
-        <input type="text" placeholder="Sound..."
-          {... soundProps}
-          />
-        <input type="color"
-          {... colorProps}
-          />
-        <button>add</button>
-      </form>
+      <TreeContext.Provider value={{ trees }}>
+        <h1>Árvores: </h1>
+        {trees.map(t => (
+          <p key={t.id}>{t.type}</p>
+        ))}
+      </TreeContext.Provider>
     </>
   );
 }
